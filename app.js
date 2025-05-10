@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended:true}));
 
 
 app.use(cors({
-    origin:"http://localhost:8100",
+    origin:true,
     credentials:true
 }));
 app.use('/',authentication);
@@ -25,7 +25,7 @@ app.use('/appliances',appliances);
 
 const io=new Server(server,{
     cors:{
-        origin:'http://localhost:8100',
+        origin:true,
         methods:['POST','GET']
     }
 });
