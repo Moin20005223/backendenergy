@@ -34,7 +34,8 @@ router.post('/create-appliance',async(req,res)=>{
 router.post('/control-appliance',async(req,res)=>{
     const {status,id}=req.body;
 
-    if(!status || !id )
+    console.log('stat',status,id);
+    if(status==null || !id )
     {
        return res.status(400).json({success:false,message:'Field cannot be empty!'});
     }
@@ -44,12 +45,14 @@ router.post('/control-appliance',async(req,res)=>{
         if(!exist)
             return res.status(400).json({success:false,message:'No appliance found with associated id!'});
 
+        // console.log('exist',exist);
         await applianceModel.updateMany({userid:id},{$set:{status}})
 
         return res.status(200).json({success:true,message:'All Appliances turned on!'});
     }
     catch(error)
     {
+              console.log(error,'ero')
         return res.status(500).json({success:false,message:error});
     }
 
